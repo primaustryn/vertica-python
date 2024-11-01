@@ -201,7 +201,7 @@ class Cursor(object):
         self.flush_to_query_ready()
 
         if (os.environ.get('TASK_TYPE')=='NOTEBOOK' or os.environ.get('TASK_TYPE')=='TRAINING'):
-            operation = "-- SACP|"+os.environ.get('AICENTRO_CURRENT_USER') + "\n" + operation
+            operation = "-- SACP|" + os.environ.get('AICENTRO_CURRENT_USER') + "\n" + operation
 
         operation = as_text(operation)
         self.operation = operation
