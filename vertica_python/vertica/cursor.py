@@ -35,7 +35,7 @@
 
 
 from __future__ import print_function, division, absolute_import
-
+import os
 import datetime
 import glob
 import inspect
@@ -199,6 +199,9 @@ class Cursor(object):
             raise errors.InterfaceError('Cursor is closed')
 
         self.flush_to_query_ready()
+
+        if (os.environ.get('TASK_TYPE')=='NOTEBOOK' or os.environ.get('TASK_TYPE')=='TRAINING'):
+            operation = "-- SACP|" + os.environ.get('AICENTRO_CURRENT_USER') + "\n" + operation
 
         operation = as_text(operation)
         self.operation = operation
